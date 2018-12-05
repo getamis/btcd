@@ -1,7 +1,8 @@
-module github.com/btcsuite/btcd
+module github.com/getamis/btcd
 
 require (
-	github.com/aead/siphash v1.0.1 // indirect
+	github.com/aead/siphash v1.0.1
+	github.com/btcsuite/btcd v0.0.0-20181130015935-7d2daa5bfef2
 	github.com/btcsuite/btclog v0.0.0-20170628155309-84c8d2346e9f
 	github.com/btcsuite/btcutil v0.0.0-20190207003914-4c204d697803
 	github.com/btcsuite/go-socks v0.0.0-20170105172521-4720035b7bfd
@@ -17,3 +18,5 @@ require (
 	github.com/onsi/gomega v1.4.3 // indirect
 	golang.org/x/crypto v0.0.0-20170930174604-9419663f5a44
 )
+
+replace github.com/btcsuite/btcd => ./
