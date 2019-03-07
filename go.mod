@@ -17,4 +17,4 @@ require (
 	golang.org/x/crypto v0.0.0-20170930174604-9419663f5a44
 )
 
-replace github.com/btcsuite/btcd => ./
+replace github.com/btcsuite/btcd => github.com/getamis/btcd
