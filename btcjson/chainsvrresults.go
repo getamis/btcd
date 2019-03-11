@@ -6,47 +6,41 @@ package btcjson
 
 import "encoding/json"
 
-// GetBlockHeaderVerboseResult models the data from the getblockheader command when
-// the verbose flag is set.  When the verbose flag is not set, getblockheader
+// GetBlockBaseVerboseResult models the common data from the getblock command when
+// verbose flag set to 1 or 2. When the verbose flag is not set, getblock
 // returns a hex-encoded string.
-type GetBlockHeaderVerboseResult struct {
+type GetBlockBaseVerboseResult struct {
 	Hash          string  `json:"hash"`
 	Confirmations int64   `json:"confirmations"`
-	Height        int32   `json:"height"`
+	StrippedSize  int32   `json:"strippedsize"`
+	Size          int32   `json:"size"`
+	Weight        int32   `json:"weight"`
+	Height        int64   `json:"height"`
 	Version       int32   `json:"version"`
 	VersionHex    string  `json:"versionHex"`
 	MerkleRoot    string  `json:"merkleroot"`
 	Time          int64   `json:"time"`
-	Nonce         uint64  `json:"nonce"`
+	MedianTime    int64   `json:"mediantime"`
+	Nonce         uint32  `json:"nonce"`
 	Bits          string  `json:"bits"`
 	Difficulty    float64 `json:"difficulty"`
 	ChainWork     string  `json:"chainwork"`
-	PreviousHash  string  `json:"previousblockhash,omitempty"`
+	PreviousHash  string  `json:"previousblockhash"`
 	NextHash      string  `json:"nextblockhash,omitempty"`
 }
 
 // GetBlockVerboseResult models the data from the getblock command when the
-// verbose flag is set.  When the verbose flag is not set, getblock returns a
-// hex-encoded string.
+// verbose flag is set to 1 (default).
 type GetBlockVerboseResult struct {
-	Hash          string        `json:"hash"`
-	Confirmations int64         `json:"confirmations"`
-	StrippedSize  int32         `json:"strippedsize"`
-	Size          int32         `json:"size"`
-	Weight        int32         `json:"weight"`
-	Height        int64         `json:"height"`
-	Version       int32         `json:"version"`
-	VersionHex    string        `json:"versionHex"`
-	MerkleRoot    string        `json:"merkleroot"`
-	Tx            []string      `json:"tx,omitempty"`
-	RawTx         []TxRawResult `json:"rawtx,omitempty"`
-	Time          int64         `json:"time"`
-	Nonce         uint32        `json:"nonce"`
-	Bits          string        `json:"bits"`
-	Difficulty    float64       `json:"difficulty"`
-	ChainWork     string        `json:"chainwork"`
-	PreviousHash  string        `json:"previousblockhash"`
-	NextHash      string        `json:"nextblockhash,omitempty"`
+	*GetBlockBaseVerboseResult
+	Tx []string `json:"tx,omitempty"`
+}
+
+// GetBlockVerboseTxResult models the data from the getblock command when the
+// verbose flag is set to 2.
+type GetBlockVerboseTxResult struct {
+	*GetBlockBaseVerboseResult
+	Tx []TxRawResult `json:"tx,omitempty"`
 }
 
 // CreateMultiSigResult models the data returned from the createmultisig
